@@ -8,10 +8,14 @@ const App: React.FC = () => {
   const [videos, setVideos] = useState<ProcessedVideo[]>([]);
 
   useEffect(() => {
-    getVideos()
-      .then((videos) => {
-        setVideos(videos);
-      });
+    const aborter = new AbortController();
+    
+    (async () => {
+      const videos = await getVideos(aborter.signal);
+      setVideos(videos);
+    })()
+
+    return () => aborter.abort();
   }, []);
 
   return (
