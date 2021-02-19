@@ -7,7 +7,6 @@ interface TableControlInterface {
 
 export const TableControl = ({onSearch}: TableControlInterface) => {
     const searchHandler = (e: any) => {
-        console.log(e);
         onSearch(e.target.value)
     };
 
@@ -16,7 +15,7 @@ export const TableControl = ({onSearch}: TableControlInterface) => {
             id="search"
             label="Search"
             variant="outlined"
-            onKeyDown={searchHandler}
+            onKeyUp={searchHandler}
         />
     );
 };

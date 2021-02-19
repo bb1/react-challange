@@ -19,7 +19,7 @@ export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVide
     }));
 
     return [...acc, ...curVideos];
-  }, <ProcessedVideo[]>[]);
+  }, [] as ProcessedVideo[]);
 
   return moisteredAuthors;
 };
