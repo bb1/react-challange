@@ -1,5 +1,3 @@
-![movingimage](./assets/00-mi-logo.png)
-
 # Front-end developer challenge
 
 The aim of the implementation is not to complete the assignment (of course this would be great), but rather to find out more about your approach, the ***quality, cleanliness and structure*** of your code, and get to know your personal ***prioritization***. This means that it’s better if send an unfinished app with code you can be proud of, rather than a complete app with lots of messy code.
