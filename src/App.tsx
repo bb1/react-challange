@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
 import { VideosTable } from './components/videos-table';
-import { getVideos } from './services/videos';
+import { TableControl } from './components/table-control';
+import { filterVideos, getVideos } from './services/videos';
 import { ProcessedVideo } from './common/interfaces';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: '#f44336',
+    },
+  },
+});
 
 const App: React.FC = () => {
   const [videos, setVideos] = useState<ProcessedVideo[]>([]);
+  const [filteredVideos, setFilteredVideos] = useState<ProcessedVideo[]>([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const aborter = new AbortController();
@@ -13,10 +29,15 @@ const App: React.FC = () => {
     (async () => {
       const videos = await getVideos(aborter.signal);
       setVideos(videos);
+      setFilteredVideos(videos);
     })()
 
     return () => aborter.abort();
   }, []);
+
+  useEffect(() => {
+    setFilteredVideos(filterVideos(search, videos));
+  }, [search, videos]);
 
   return (
     <>
@@ -26,7 +47,8 @@ const App: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Container>
-        <VideosTable videos={videos} />
+        <TableControl onSearch={setSearch}></TableControl>
+        <VideosTable videos={filteredVideos} />
       </Container>
     </>
   );

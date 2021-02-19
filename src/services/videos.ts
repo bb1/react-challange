@@ -23,3 +23,14 @@ export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVide
 
   return moisteredAuthors;
 };
+
+export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
+  if (!search) {
+    return videos;
+  }
+
+  const filtered = videos.filter(({name, author, categories}) => 
+    name.includes(search) || author.includes(search) || categories.includes(search)
+  );
+  return filtered;
+}
