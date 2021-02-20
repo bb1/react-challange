@@ -7,7 +7,7 @@ import { TableControl } from './components/table-control';
 import { filterVideos, getVideos } from './services/videos';
 import { ProcessedVideo } from './common/interfaces';
 
-const theme = createMuiTheme({
+createMuiTheme({
   palette: {
     primary: {
       main: purple[500],
@@ -36,7 +36,8 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setFilteredVideos(filterVideos(search, videos));
+    const filtered = filterVideos(search, videos);
+    setFilteredVideos(filtered);
   }, [search, videos]);
 
   return (

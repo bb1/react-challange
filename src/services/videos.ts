@@ -10,7 +10,7 @@ export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVide
     getAuthors(abortSignal),
   ]);
 
-  const moisteredAuthors = authors.reduce((acc, {name: author, videos}) => {
+  const videos = authors.reduce((acc, {name: author, videos}) => {
     const curVideos: ProcessedVideo[] = videos.map(({id, name, catIds}) => ({
       id,
       name,
@@ -21,7 +21,7 @@ export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVide
     return [...acc, ...curVideos];
   }, [] as ProcessedVideo[]);
 
-  return moisteredAuthors;
+  return videos;
 };
 
 export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
@@ -30,7 +30,12 @@ export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
   }
 
   const filtered = videos.filter(({name, author, categories}) => 
-    name.includes(search) || author.includes(search) || categories.includes(search)
+    searchString(name, search) || searchString(author, search) || categories.find(cat => searchString(cat, search))
   );
+
+  // TODO: highlight search
+
   return filtered;
 }
+
+const searchString = (target: string, search: string) => target.toLocaleLowerCase().includes(search.toLocaleLowerCase());
