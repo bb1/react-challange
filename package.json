@@ -1,6 +1,6 @@
 {
   "name": "video-manager",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "start": "json-server db.json -p 3001 & react-scripts start",
@@ -17,12 +17,13 @@
     "@types/node": "^14.14.9",
     "@types/react": "16.14.0",
     "@types/react-dom": "16.9.9",
+    "json-server": "latest",
+    "node-sass": "4.x",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-scripts": "4.0.0",
     "typescript": "4.0.5",
-    "web-vitals": "^1.0.1",
-    "json-server": "latest"
+    "web-vitals": "^1.0.1"
   },
   "eslintConfig": {
     "extends": [
