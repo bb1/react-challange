@@ -1,3 +1,6 @@
+type formatType = 'Augenkrebs' | 'medium' | 'best';
+type qualityType = '320p' | '720p' | '1080p' | '4K';
+
 export interface Category {
   id: number;
   name: string;
@@ -7,6 +10,9 @@ export interface Video {
   id: number;
   catIds: number[];
   name: string;
+  res?: qualityType;
+  size?: number;
+  releaseDate: string;
 }
 
 export interface Author {
@@ -20,4 +26,7 @@ export interface ProcessedVideo {
   name: string;
   author: string;
   categories: string[];
+  formatName?: formatType;
+  res?: qualityType;
+  releaseDate?: string;
 }

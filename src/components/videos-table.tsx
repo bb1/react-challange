@@ -15,7 +15,9 @@ export const VideosTable: React.FC<VideosTableProps> = ({ videos }) => {
             <TableCell>Video Name</TableCell>
             <TableCell>Author</TableCell>
             <TableCell>Categories</TableCell>
-            <TableCell>Options</TableCell>
+            <TableCell>Highest quality format</TableCell>
+            <TableCell>Release Date</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -26,6 +28,8 @@ export const VideosTable: React.FC<VideosTableProps> = ({ videos }) => {
               </TableCell>
               <TableCell>{video.author}</TableCell>
               <TableCell>{video.categories.join(', ')}</TableCell>
+              <TableCell>{video.formatName} {video.res}</TableCell>
+              <TableCell>{video.releaseDate}</TableCell>
               <TableCell> {/* add buttons here as needed */}  </TableCell>
             </TableRow>
           ))}
