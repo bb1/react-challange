@@ -1,11 +1,11 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 
-interface TableControlInterface {
+interface SearchbarInterface {
     onSearch: (search: string) => void
 };
 
-export const TableControl = ({onSearch}: TableControlInterface) => {
+export const Searchbar = ({onSearch}: SearchbarInterface) => {
     const searchHandler = (e: any) => {
         onSearch(e.target.value)
     };

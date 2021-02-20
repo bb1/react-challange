@@ -3,7 +3,7 @@ import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import { VideosTable } from './components/videos-table';
-import { TableControl } from './components/table-control';
+import { Searchbar } from './components/searchbar';
 import { filterVideos, getVideos } from './services/videos';
 import { ProcessedVideo } from './common/interfaces';
 
@@ -48,7 +48,7 @@ const App: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Container>
-        <TableControl onSearch={setSearch}></TableControl>
+        <Searchbar onSearch={setSearch}></Searchbar>
         <VideosTable videos={filteredVideos} />
       </Container>
     </>
