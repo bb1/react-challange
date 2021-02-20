@@ -1,5 +1,5 @@
-type formatType = 'Augenkrebs' | 'medium' | 'best';
-type qualityType = '320p' | '720p' | '1080p' | '4K';
+export type formatType = 'Augenkrebs' | 'medium' | 'best';
+export type qualityType = '320p' | '720p' | '1080p' | '4K';
 
 export interface Category {
   id: number;

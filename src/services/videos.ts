@@ -1,6 +1,6 @@
 import { getCategories } from './categories';
 import { getAuthors } from './authors';
-import { ProcessedVideo } from '../common/interfaces';
+import { ProcessedVideo, formatType } from '../common/interfaces';
 
 export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVideo[]> => {
   
@@ -10,7 +10,7 @@ export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVide
     getAuthors(abortSignal),
   ]);
 
-  const videos = authors.reduce((acc, {name: author, videos}) => {
+  const videosWithSize = authors.reduce((acc, {name: author, videos}) => {
     const curVideos = videos.map(({id, name, catIds, size, res, releaseDate}) => ({
       id,
       name,
@@ -25,9 +25,13 @@ export const getVideos = async (abortSignal: AbortSignal): Promise<ProcessedVide
   }, [] as (ProcessedVideo & {size?: number})[]);
 
 
-  const sizeByRes = getSizeByRes(videos);
+  const sizeByRes = getSizeByRes(videosWithSize);
+  const videos = videosWithSize.map(({size, ...video}) => ({
+    ...video,
+    formatName: getFormatName(sizeByRes, video.res, size)
+  }));
 
-  return videos as ProcessedVideo[];
+  return videos;
 };
 
 export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
@@ -71,3 +75,16 @@ const getSizeByRes = (videos: (ProcessedVideo & {size?: number})[]) => {
 
   return sizeByResObj;
 }
+
+const QUALITY_LEVELS = ['Augenkrebs', 'medium', 'best'];
+const getFormatName = (sizeByRes: any, res?: string, size?: number): formatType | undefined => {
+  if (!res || !size) {
+    return;
+  }
+
+  const sizes = sizeByRes[res];
+  const position = sizes.indexOf(size);
+  const level = Math.floor(position / sizes.length * 3);
+
+  return QUALITY_LEVELS[level] as formatType;
+};
