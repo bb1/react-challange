@@ -86,5 +86,9 @@ const getFormatName = (sizeByRes: any, res?: string, size?: number): formatType 
   const position = sizes.indexOf(size);
   const level = Math.floor(position / sizes.length * 3);
 
+  if (sizes.length === 1) {
+    return QUALITY_LEVELS[QUALITY_LEVELS.length - 1] as formatType;
+  }
+
   return QUALITY_LEVELS[level] as formatType;
 };
