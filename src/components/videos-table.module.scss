@@ -1,3 +1,5 @@
+// TODO: remove important-statements by understanding how to configure material-ui better ¯\_(ツ)_/¯
+
 .tableHead {
     font-weight: bold;
 }
@@ -6,6 +8,7 @@
     font-size: 0.7em !important;
     letter-spacing: 0.00031em;
     font-weight: bold;
+    background-color: white !important;
 }
 
 .margin {
@@ -13,13 +16,13 @@
 }
 
 .Augenkrebs {
-    background-color: rgb(255, 170, 170) !important;
+    background-color: #ffd6d6 !important
 }
 
 .medium {
-    background-color: rgb(255, 255, 162) !important;
+    background-color: #ffffc5 !important
 }
 
 .best {
-    background-color: rgb(120, 180, 120) !important;
+    background-color: #ddfbdd !important
 }
