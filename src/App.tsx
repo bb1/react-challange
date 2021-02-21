@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Container, Toolbar, Typography } from '@material-ui/core';
 import { VideosTable } from './components/videos-table';
 import { Searchbar } from './components/searchbar';
 import { filterVideos, getVideos } from './services/videos';
@@ -28,11 +28,25 @@ const App: React.FC = () => {
     setFilteredVideos(filtered);
   }, [search, videos]);
 
+  const addVideo = () => {
+    const newVideo: ProcessedVideo = {
+      id: -1,
+      author: '',
+      categories: [],
+      name: '',
+      releaseDate: '',
+      res: '1080p',
+      formatName: 'medium',
+    };
+    setVideos([...videos, newVideo]);
+  };
+
   return (
     <>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">Videos</Typography>
+          <Button color="secondary" onClick={addVideo}>Add video</Button>
         </Toolbar>
       </AppBar>
       <Container>

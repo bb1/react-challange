@@ -19,7 +19,7 @@ export const VideoRow = ({video}: VideoRowInterface) => {
 
   useEffect(() => {
     setCachedVideo(video);
-    setEditMode(false);
+    setEditMode(video.id === -1);
   }, [video]);
 
   //TODO: toggle Input-Fields in edit Mode
