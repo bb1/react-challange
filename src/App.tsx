@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import { VideosTable } from './components/videos-table';
 import { Searchbar } from './components/searchbar';
 import { filterVideos, getVideos } from './services/videos';
 import { ProcessedVideo } from './common/interfaces';
-
-createMuiTheme({
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: '#f44336',
-    },
-  },
-});
+import './theme';
 
 const App: React.FC = () => {
   const [videos, setVideos] = useState<ProcessedVideo[]>([]);
