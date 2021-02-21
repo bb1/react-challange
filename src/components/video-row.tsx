@@ -26,18 +26,18 @@ export const VideoRow = ({video}: VideoRowInterface) => {
   return (
     <TableRow>
       <TableCell component="th" scope="row">
-        {video.name}
+        {cachedVideo.name}
       </TableCell>
-      <TableCell>{video.author}</TableCell>
-      <TableCell>{video.categories.join(', ')}</TableCell>
+      <TableCell>{cachedVideo.author}</TableCell>
+      <TableCell>{cachedVideo.categories.join(', ')}</TableCell>
       <TableCell>
         <Chip
-          label={video.formatName}
-          avatar={<Avatar className={styles.resolution}>{video.res}</Avatar>}
-          className={video.formatName && styles[video.formatName]}
+          label={cachedVideo.formatName}
+          avatar={<Avatar className={styles.resolution}>{cachedVideo.res}</Avatar>}
+          className={cachedVideo.formatName && styles[cachedVideo.formatName]}
         />
       </TableCell>
-      <TableCell>{video.releaseDate}</TableCell>
+      <TableCell>{cachedVideo.releaseDate}</TableCell>
       <TableCell>
         {!editMode && (
           <IconButton aria-label="edit" className={styles.margin} onClick={() => setEditMode(true)}>
@@ -54,12 +54,21 @@ export const VideoRow = ({video}: VideoRowInterface) => {
             >
               <UndoIcon fontSize="small" />
             </IconButton>
-            <IconButton aria-label="save" className={styles.margin}>
+            <IconButton aria-label="save" className={styles.margin}
+              onClick={() => {
+                setEditMode(false);
+                // TODO: push cached video to rest update service
+              }}
+            >
               <SaveIcon fontSize="small" />
             </IconButton>
           </>
         )}
-        <IconButton aria-label="delete" className={styles.margin}>
+        <IconButton aria-label="delete" className={styles.margin}
+          onClick={() => {
+            // TODO: push video id to rest delete service
+          }}
+        >
           <DeleteIcon fontSize="small" />
         </IconButton>
       </TableCell>
