@@ -39,10 +39,12 @@ export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
     return videos;
   }
 
-  const filtered = videos.filter(({name, author, categories}) => 
+  const filtered = videos.filter(({name, author, categories, releaseDate, formatName, res}) => 
     searchString(name, search) ||
     searchString(author, search) ||
-    categories.find(cat => searchString(cat, search))
+    categories.find(cat => searchString(cat, search)) ||
+    searchString(formatName as string, search) ||
+    searchString(res as string, search)
   );
 
   // TODO: highlight search
