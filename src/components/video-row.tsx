@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import UndoIcon from '@material-ui/icons/Undo';
 import SaveIcon from '@material-ui/icons/Save';
 import { ProcessedVideo } from "../common/interfaces";
+import { deleteVideo, saveVideo } from '../services/video';
 
 import styles from './videos-table.module.scss';
 
@@ -55,9 +56,10 @@ export const VideoRow = ({video}: VideoRowInterface) => {
               <UndoIcon fontSize="small" />
             </IconButton>
             <IconButton aria-label="save" className={styles.margin}
-              onClick={() => {
+              onClick={async () => {
                 setEditMode(false);
-                // TODO: push cached video to rest update service
+                await saveVideo(cachedVideo);
+                // TODO: trigger data reload
               }}
             >
               <SaveIcon fontSize="small" />
@@ -66,7 +68,8 @@ export const VideoRow = ({video}: VideoRowInterface) => {
         )}
         <IconButton aria-label="delete" className={styles.margin}
           onClick={() => {
-            // TODO: push video id to rest delete service
+            deleteVideo(cachedVideo);
+            // TODO: trigger data reload
           }}
         >
           <DeleteIcon fontSize="small" />
