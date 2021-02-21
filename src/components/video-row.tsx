@@ -26,10 +26,9 @@ export const VideoRow = ({video}: VideoRowInterface) => {
 
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
-        {cachedVideo.name}
+      <TableCell component="th" scope="row" dangerouslySetInnerHTML={{__html: cachedVideo.name}}>
       </TableCell>
-      <TableCell>{cachedVideo.author}</TableCell>
+      <TableCell dangerouslySetInnerHTML={{__html: cachedVideo.author}}></TableCell>
       <TableCell>{cachedVideo.categories.join(', ')}</TableCell>
       <TableCell>
         <Chip

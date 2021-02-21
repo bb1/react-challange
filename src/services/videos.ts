@@ -39,20 +39,32 @@ export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
     return videos;
   }
 
-  const filtered = videos.filter(({name, author, categories, releaseDate, formatName, res}) => 
+  const filtered = videos
+  .filter(({name, author, categories, releaseDate, formatName, res}) => 
     searchString(name, search) ||
     searchString(author, search) ||
     categories.find(cat => searchString(cat, search)) ||
-    searchString(formatName as string, search) ||
-    searchString(res as string, search)
-  );
+    searchString(formatName, search) ||
+    searchString(res, search) || 
+    searchString(releaseDate, search)
+  )
+  .map(video => ({...video})); // copy to allow manipulation
 
-  // TODO: highlight search
+  // highlight search
+  filtered.forEach(video => {
+    Object.keys(video).forEach(key => {
+      // @ts-ignore
+      if (typeof video[key] !== 'string') return;
+      const reg = new RegExp(`(${search})`, 'ig');
+      // @ts-ignore
+      video[key] = (video[key] as string).replaceAll(reg, `<mark>$1</mark>`);
+    });
+  });
 
   return filtered;
 }
 
-const searchString = (target: string, search: string) => target.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+const searchString = (target: string = '', search: string = '') => target.toLocaleLowerCase().includes(search.toLocaleLowerCase());
 
 const getSizeByRes = (videos: (ProcessedVideo & {size?: number})[]) => {
   const sizeByRes = new Map<string, Set<number>>();
