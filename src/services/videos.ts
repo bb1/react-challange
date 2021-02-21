@@ -52,9 +52,7 @@ export const filterVideos = (search: string, videos: ProcessedVideo[]) => {
 
   // highlight search
   filtered.forEach(video => {
-    Object.keys(video).forEach(key => {
-      // @ts-ignore
-      if (typeof video[key] !== 'string') return;
+    ['author', 'name'].forEach(key => {
       const reg = new RegExp(`(${search})`, 'ig');
       // @ts-ignore
       video[key] = (video[key] as string).replaceAll(reg, `<mark>$1</mark>`);
