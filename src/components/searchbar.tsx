@@ -16,6 +16,7 @@ export const Searchbar = ({onSearch}: SearchbarInterface) => {
             label="Search"
             variant="outlined"
             onKeyUp={searchHandler}
+            margin={'normal'}
         />
     );
 };
