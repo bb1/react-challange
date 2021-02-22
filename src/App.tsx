@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Button, Container, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Container, Toolbar, Typography, ThemeProvider } from '@material-ui/core';
 import { VideosTable } from './components/videos-table';
 import { Searchbar } from './components/searchbar';
 import { filterVideos, getVideos } from './services/videos';
 import { ProcessedVideo } from './common/interfaces';
-import './theme';
+import { theme } from './theme';
 
 const App: React.FC = () => {
   const [videos, setVideos] = useState<ProcessedVideo[]>([]);
@@ -42,7 +42,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">Videos</Typography>
@@ -53,7 +53,7 @@ const App: React.FC = () => {
         <Searchbar onSearch={setSearch}></Searchbar>
         <VideosTable videos={filteredVideos} />
       </Container>
-    </>
+    </ThemeProvider>
   );
 };
 
